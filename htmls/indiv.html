@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Charts</title>
+</head>
+<body>
+    <div class="container">
+        <canvas id="mychart"></canvas>
+    </div>
+
+    <script>
+
+function showGraph()
+        {
+            {
+                $.post("data.php",
+                function (data)
+                {
+                    console.log(data);
+                    var name = [];
+                    var marks = [];
+
+                    for (var i in data) {
+                        name.push(data[i].student_name);
+                        marks.push(data[i].marks);
+                    }
+
+                    var chartdata = {
+                        labels: name,
+                        datasets: [
+                            {
+                                label: 'Student Marks',
+                                backgroundColor: '#49e2ff',
+                                borderColor: '#46d5f1',
+                                hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#666666',
+                                data: marks
+                            }
+                        ]
+                    };
+
+                    var graphTarget = $("#graphCanvas");
+
+                    var barGraph = new Chart(graphTarget, {
+                        type: 'bar',
+                        data: chartdata
+                    });
+                });
+            }
+        }
+
+        let mychart = document.getElementById("mychart").getContext('2d');
+        let charts = new Chart(mychart, {
+            type: 'line', //pie,radar,line
+            data: {
+                labels : ["Rocky","Heltz","Petanns","AA","Top Gear","Glory"],
+                datasets: [{
+                    label : ["Graduates"],
+                    data: [200,300,500,600,100,200],
+                    backgroundColor: ["green","red","blue","grey","purple","black"],
+                    borderWidth:3
+                }]
+                
+            },
+            options: {
+                animations: {
+                tension: {
+                    duration: 1000,
+                    easing: 'easeInOutSine',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                }
+                },
+                scales: {
+                y: { // defining min and max so hiding the dataset does not change scale range
+                    min: 0,
+                    max: 1000
+                }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+#saleForm{
+    box-shadow: -1px -5px 13px 5px lightgrey;
+    border-radius: 11px;
+    margin-bottom: 5pc;
+}
+#btnGenerator{
+    margin-bottom: 4pc;
+    width: 30pc;
+    margin-left: 22pc;
+    background-color: darkcyan;
+    font-size: larger;
+    font-family: none;
+}
